@@ -1,15 +1,14 @@
 import _ from "lodash";
-import React, {Component} from "react";
+import React from "react";
 import YTSearch from "youtube-api-search";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
-// import VideoListItem from "./VideoListItem";
 
 
 const API_KEY = 'AIzaSyCviDeN5VZpk-ckbJoXjVPmQVFpbwb00JA';
 
-class App extends Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +30,7 @@ class App extends Component {
             <div>
                 <p>HELLO there!</p>
                 <SearchBar/>
+                <VideoDetail video={this.state.selectedVideo} />
                 <VideoList videos={this.state.videos}/>
             </div>
         );
