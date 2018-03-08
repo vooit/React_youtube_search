@@ -4,8 +4,6 @@ import YTSearch from "youtube-api-search";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
-
-
 const API_KEY = 'AIzaSyCviDeN5VZpk-ckbJoXjVPmQVFpbwb00JA';
 
 class App extends React.Component {
@@ -16,24 +14,33 @@ class App extends React.Component {
             selectedVideo: null
         };
 
-        YTSearch({key:API_KEY, term:'splitboards'}, (videos)=>{
+        this.videoSearch('splitboarding')
+
+    }
+
+    videoSearch(term) {
+        YTSearch({key: API_KEY, term: term}, (videos) => {
             console.log(videos);
             this.setState({
-                videos:videos,
+                videos: videos,
                 selectedVideo: videos[0]
             });
         })
     }
 
+
     render() {
         return (
             <div>
-                <p>HELLO there!</p>
-                <SearchBar/>
-                <VideoDetail video={this.state.selectedVideo} />
-                <VideoList
-                    onVideoSelect = {selectedVideo=>this.setState({selectedVideo})}
-                    videos={this.state.videos}/>
+                <SearchBar onSearchTermChange = {term => this.videoSearch(term)}/>
+                <div className="row">
+                    <VideoDetail video={this.state.selectedVideo}/>
+                    <VideoList
+                        onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+                        videos={this.state.videos}/>
+                </div>
+
+
             </div>
         );
     }
