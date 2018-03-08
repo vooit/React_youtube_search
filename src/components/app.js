@@ -16,13 +16,10 @@ class App extends React.Component {
             selectedVideo: null
         };
 
-
-
-
         YTSearch({key:API_KEY, term:'splitboards'}, (videos)=>{
             console.log(videos);
             this.setState({
-                videos,
+                videos:videos,
                 selectedVideo: videos[0]
             });
         })
@@ -34,7 +31,9 @@ class App extends React.Component {
                 <p>HELLO there!</p>
                 <SearchBar/>
                 <VideoDetail video={this.state.selectedVideo} />
-                <VideoList videos={this.state.videos}/>
+                <VideoList
+                    onVideoSelect = {selectedVideo=>this.setState({selectedVideo})}
+                    videos={this.state.videos}/>
             </div>
         );
     }
